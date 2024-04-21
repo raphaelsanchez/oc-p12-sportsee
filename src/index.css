@@ -1,68 +1,78 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    /* Colors */
+    --color-primary: #e60000;
+    --color-neutral-900: #020203;
+    --color-neutral-0: #ffffff;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Spacing */
+    --spacing-small: 0.25rem;
+    --spacing-medium: 1rem;
+    --spacing-large: 2rem;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: currentColor;
+    text-decoration: inherit;
+    outline: none;
+}
+a[class] {
+    display: inline-block;
+    border-radius: 0.25rem;
 }
 a:hover {
-  color: #535bf2;
+    color: var(--color-primary);
+}
+a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 0.25em;
+}
+
+ul[class] {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    min-height: 100vh;
+    line-height: 1.5;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-neutral-0);
+    color: var(--color-neutral-900);
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h1 strong {
+    color: var(--color-primary);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+main {
+    width: min(90%, 80rem);
+    margin: var(--spacing-medium) auto;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-medium);
 }

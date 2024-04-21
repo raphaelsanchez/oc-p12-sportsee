@@ -1,0 +1,25 @@
+.nav {
+    grid-area: nav;
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
+    background-color: #020203;
+    color: #fff;
+}
+
+.nav nav {
+    margin: auto;
+}
+.nav .menu {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    list-style: none;
+    margin-inline: auto;
+    justify-content: space-between;
+}
+
+.nav .menu-item {
+    font-size: 1.5rem;
+}
