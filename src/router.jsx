@@ -1,6 +1,6 @@
 import App from '@/layouts/App'
-import Home from '@/pages/Home'
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Profile from './pages/Profile'
 
 /**
  * Router component. Defines the application routes.
@@ -19,7 +19,7 @@ export function Router() {
                 },
                 {
                     path: '/user/:id',
-                    element: <Home />,
+                    element: <Profile />,
                 },
             ],
         },

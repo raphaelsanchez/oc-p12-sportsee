@@ -1,0 +1,35 @@
+.keyDatas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--spacing-medium);
+    align-items: start;
+}
+
+.dataCard {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    padding: var(--spacing-large);
+    background-color: var(--color-neutral-100);
+    border-radius: 0.5rem;
+}
+
+.dataCard__data {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--spacing-small);
+}
+
+.dataCard__value {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-neutral-900);
+}
+
+.dataCard__title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-neutral-700);
+}

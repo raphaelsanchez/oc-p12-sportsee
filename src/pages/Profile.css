@@ -1,0 +1,19 @@
+.profil {
+    display: grid;
+    grid-template-areas:
+        "header header header header"
+        "activity activity activity keydata"
+        "objectif radar score keydata";
+}
+
+.header {
+    grid-area: header;
+}
+
+.keyDatas {
+    grid-area: keydata;
+}
+
+.score {
+    grid-area: score;
+}

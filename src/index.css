@@ -2,6 +2,8 @@
     /* Colors */
     --color-primary: #e60000;
     --color-neutral-900: #020203;
+    --color-neutral-700: #74798c;
+    --color-neutral-100: #fbfbfb;
     --color-neutral-0: #ffffff;
 
     /* Spacing */
@@ -75,4 +77,16 @@ main {
     align-items: center;
     flex-wrap: wrap;
     gap: var(--spacing-medium);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
