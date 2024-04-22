@@ -5,9 +5,9 @@ import logo from '/logo.svg'
 /**
  * Renders the navigation component.
  *
- * @returns {ReactNode} The rendered navigation component.
+ * @returns {JSX.Element} The rendered navigation component.
  */
-const Nav = () => {
+export default function Nav() {
     return (
         <nav className="nav" aria-label="Menu principal">
             <Link className="home-link" to="/">
@@ -38,5 +38,3 @@ const Nav = () => {
         </nav>
     )
 }
-
-export default Nav

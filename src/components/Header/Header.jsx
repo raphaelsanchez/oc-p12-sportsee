@@ -3,9 +3,9 @@ import './Header.css'
 /**
  * Represents the header component.
  *
- * @returns {ReactNode} The rendered header component.
+ * @returns {JSX.Element} The rendered header component.
  */
-const Header = () => {
+export default function Header() {
     return (
         <header className="header">
             <h1>
@@ -15,5 +15,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header

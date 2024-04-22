@@ -1,21 +1,14 @@
 import Header from '@/components/Header/Header'
 
 /**
- * Represents the User Dashboard page
+ * Renders the Home component.
  *
- * @returns {ReactNode} The rendered User component.
+ * @returns {JSX.Element} The rendered Home component.
  */
-const User = () => {
+export default function Home() {
     return (
-        // TODO: Add the DailyActivity component
-        // TODO: Add the SessionsAverage component
-        // TODO: Add the SessionPerformance component
-        // TODO: Add the GlobalScore component
-        // TODO: Add the InfoCards component
-        <main className="content-dashboard">
+        <main>
             <Header />
         </main>
     )
 }
-
-export default User

@@ -7,7 +7,7 @@ import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
  *
  * @returns {JSX.Element} The Router component.
  */
-export const Router = () => {
+export function Router() {
     const router = createBrowserRouter([
         {
             path: '/',

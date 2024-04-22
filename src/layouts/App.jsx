@@ -6,9 +6,9 @@ import './App.css'
 /**
  * Renders the Dashboard component.
  *
- * @returns {ReactNode} The rendered Dashboard component.
+ * @returns {JSX.Element} The rendered Dashboard component.
  */
-const Dashboard = () => {
+export default function Dashboard() {
     return (
         <>
             <Nav />
@@ -17,5 +17,3 @@ const Dashboard = () => {
         </>
     )
 }
-
-export default Dashboard

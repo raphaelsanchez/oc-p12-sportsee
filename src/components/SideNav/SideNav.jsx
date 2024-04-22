@@ -5,9 +5,9 @@ import './SideNav.css'
 /**
  * Renders a side navigation bar.
  *
- * @returns {ReactNode} The rendered SideNav component.
+ * @returns {JSX.Element} The rendered SideNav component.
  */
-const SideNav = () => {
+export default function SideNav() {
     return (
         <aside className="sideNav">
             <nav className="sidebar__nav" aria-label="Menu latéral">
@@ -50,5 +50,3 @@ const SideNav = () => {
         </aside>
     )
 }
-
-export default SideNav
