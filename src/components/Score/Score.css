@@ -17,3 +17,7 @@
     font-weight: 500;
     color: var(--color-neutral-900);
 }
+
+.score .recharts-surface {
+    background-image: radial-gradient(white, white 52%, transparent 52%);
+}

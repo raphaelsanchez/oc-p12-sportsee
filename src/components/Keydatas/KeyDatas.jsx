@@ -32,25 +32,25 @@ export default function KeyDatas({ userId = 0 }) {
                 <>
                     <Card
                         title="Calories"
-                        value={keyData.calorieCount}
+                        value={keyData?.calorieCount}
                         unit="kCal"
                         color="#e60000"
                     />
                     <Card
                         title="Protéines"
-                        value={keyData.proteinCount}
+                        value={keyData?.proteinCount}
                         unit="g"
                         color="#4AB8FF"
                     />
                     <Card
                         title="Glucides"
-                        value={keyData.carbohydrateCount}
+                        value={keyData?.carbohydrateCount}
                         unit="g"
                         color="#FDCC0C"
                     />
                     <Card
                         title="Lipides"
-                        value={keyData.lipidCount}
+                        value={keyData?.lipidCount}
                         unit="g"
                         color="#FD5181"
                     />
@@ -62,5 +62,5 @@ export default function KeyDatas({ userId = 0 }) {
 
 // PropTypes definition
 KeyDatas.propTypes = {
-    userId: PropTypes.number.isRequired,
+    userId: PropTypes.number,
 }

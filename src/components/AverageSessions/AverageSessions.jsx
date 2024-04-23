@@ -31,17 +31,22 @@ export default function AverageSessions({ userId = 0 }) {
     const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
     // Attibute a session length to each day
-    const sessions = [
-        { day: 'Jour précédent', ...averageSessions.sessions[0] },
-        ...days.map((day, index) => ({
-            ...averageSessions.sessions[index + offset],
-            day: day,
-        })),
-        {
-            day: 'Jour suivant',
-            ...averageSessions.sessions[averageSessions.sessions.length - 1],
-        },
-    ]
+    let sessions = []
+    if (averageSessions.sessions) {
+        sessions = [
+            { day: 'Jour précédent', ...averageSessions.sessions[0] },
+            ...days.map((day, index) => ({
+                ...averageSessions.sessions[index + offset],
+                day: day,
+            })),
+            {
+                day: 'Jour suivant',
+                ...averageSessions.sessions[
+                    averageSessions.sessions.length - 1
+                ],
+            },
+        ]
+    }
 
     // Calculate the time average
     const average =
@@ -103,10 +108,22 @@ export default function AverageSessions({ userId = 0 }) {
                             padding: '10px',
                         }}
                     />
+                    <defs>
+                        <linearGradient
+                            id="gradient"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                        >
+                            <stop offset="0%" stopColor="#ffffff33" />
+                            <stop offset="66%" stopColor="#ffffffff" />
+                        </linearGradient>
+                    </defs>
                     <Line
                         type="natural"
                         dataKey="sessionLength"
-                        stroke="white"
+                        stroke="url(#gradient)"
                         dot={false}
                         strokeWidth={2}
                         unit=" min"

@@ -23,3 +23,25 @@
 .averageSessions .recharts-cartesian-axis-tick:last-of-type {
     display: none;
 }
+
+.averageSessions .dot {
+    fill: #ffffff !important;
+}
+
+.averageSessions .toolTip {
+    color: #020203;
+    background: #ffffff;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.averageSessions .cursorShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0);
+}

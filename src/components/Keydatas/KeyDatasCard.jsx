@@ -27,8 +27,8 @@ export function KeyDatasCard({
 }
 
 KeyDatasCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-    unit: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.number,
+    unit: PropTypes.string,
     color: PropTypes.string,
 }

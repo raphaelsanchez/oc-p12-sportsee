@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Activity from '../components/Activity/Activity'
 import AverageSessions from '../components/AverageSessions/AverageSessions'
 import KeyDatas from '../components/Keydatas/KeyDatas'
+import Performances from '../components/Performances/Performances'
 import Score from '../components/Score/Score'
 import './Profile.css'
 
@@ -20,6 +21,7 @@ export default function Profile() {
                 <Activity userId={Number(id)} />
                 <KeyDatas userId={Number(id)} />
                 <AverageSessions userId={Number(id)} />
+                <Performances userId={Number(id)} />
                 <Score userId={Number(id)} />
             </div>
         </main>

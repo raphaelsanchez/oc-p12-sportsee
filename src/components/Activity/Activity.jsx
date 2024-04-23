@@ -34,10 +34,13 @@ export default function Activity({ userId = 0 }) {
     const days = Array.from({ length: numDays }, (_, i) => i + 1)
 
     // Attibute a session length to each day
-    const sessions = days.map((day, index) => ({
-        ...userActivity.sessions[index + offset],
-        day: day, // Attribution de la session au jour de la semaine
-    }))
+    let sessions = []
+    if (userActivity.sessions && userActivity.sessions.length > 0) {
+        sessions = days.map((day, index) => ({
+            ...userActivity.sessions[index + offset],
+            day: day, // Attribution de la session au jour de la semaine
+        }))
+    }
 
     // Legend value
     const legendValue = (value) => {

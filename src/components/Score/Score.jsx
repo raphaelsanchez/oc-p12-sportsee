@@ -37,7 +37,6 @@ export default function Score({ userId }) {
                     startAngle={90}
                     endAngle={440}
                 >
-                    <circle cx="50%" cy="50%" r={86} fill="white" />
                     <PolarAngleAxis
                         type="number"
                         domain={[0, 100]}
