@@ -1,0 +1,21 @@
+.performance {
+    position: relative;
+    background-color: #282d30;
+    border-radius: var(--radius-small);
+    aspect-ratio: 1 / 1;
+}
+
+.performance h2 {
+    position: absolute;
+
+    top: var(--spacing-large);
+    left: var(--spacing-large);
+
+    max-width: 152px;
+
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-neutral-0);
+    opacity: 0.5;
+}

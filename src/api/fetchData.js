@@ -2,6 +2,7 @@ import {
     USER_ACTIVITY,
     USER_AVERAGE_SESSIONS,
     USER_MAIN_DATA,
+    USER_PERFORMANCE,
 } from '../__mock__/data'
 
 // Set to true to use mocked data
@@ -80,6 +81,23 @@ export const getUserAverageSessions = async (id) => {
 
         return {
             sessions: data.sessions,
+        }
+    } else {
+        // TODO: API implementation here
+    }
+}
+
+export const getUserPerformance = async (id) => {
+    if (useMockedData) {
+        const data = USER_PERFORMANCE.find((user) => user.userId === id)
+
+        if (!data) {
+            throw new Error(`User with ID ${id} not found.`)
+        }
+
+        return {
+            kind: data.kind,
+            kindValue: data.data,
         }
     } else {
         // TODO: API implementation here
