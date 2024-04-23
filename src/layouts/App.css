@@ -2,8 +2,9 @@
     width: 100vw;
     width: 100svw;
     margin-inline: auto;
-    min-height: 100vh;
-    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
 }
 
 /* Layout */
@@ -15,3 +16,4 @@
     grid-template-columns: 6.5rem 1fr;
     grid-template-rows: 5.5rem 1fr;
 }
+

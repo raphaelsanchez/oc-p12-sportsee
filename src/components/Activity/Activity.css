@@ -9,6 +9,9 @@
 .activity h2 {
     position: absolute;
 
+    top: var(--spacing-large);
+    left: var(--spacing-large);
+
     margin: 0;
     font-size: 1rem;
     font-weight: 500;

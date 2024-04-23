@@ -2,6 +2,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: var(--spacing-large);
+    width: min(90%, 90rem);
+    margin-inline: auto;
+    margin-block-end: var(--spacing-large);
 }
 
 @media (min-width: 75rem) {

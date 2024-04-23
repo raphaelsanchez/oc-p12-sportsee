@@ -1,4 +1,8 @@
-import { USER_ACTIVITY, USER_MAIN_DATA } from '../__mock__/data'
+import {
+    USER_ACTIVITY,
+    USER_AVERAGE_SESSIONS,
+    USER_MAIN_DATA,
+} from '../__mock__/data'
 
 // Set to true to use mocked data
 const useMockedData = true
@@ -37,9 +41,38 @@ export const getUserInfos = async (id) => {
     }
 }
 
+/**
+ * Retrieves the user activity for the specified user ID.
+ * @param {number} id - The ID of the user.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the user's sessions.
+ * @throws {Error} - If the user with the specified ID is not found.
+ */
 export const getUserActivity = async (id) => {
     if (useMockedData) {
         const data = USER_ACTIVITY.find((user) => user.userId === id)
+
+        if (!data) {
+            throw new Error(`User with ID ${id} not found.`)
+        }
+
+        return {
+            sessions: data.sessions,
+        }
+    } else {
+        // TODO: API implementation here
+    }
+}
+
+/**
+ * Retrieves the average sessions for a user.
+ *
+ * @param {string} id - The ID of the user.
+ * @returns {Promise<{ sessions: number[] }>} The average sessions data for the user.
+ * @throws {Error} If the user with the specified ID is not found.
+ */
+export const getUserAverageSessions = async (id) => {
+    if (useMockedData) {
+        const data = USER_AVERAGE_SESSIONS.find((user) => user.userId === id)
 
         if (!data) {
             throw new Error(`User with ID ${id} not found.`)

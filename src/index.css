@@ -41,7 +41,7 @@ ul[class] {
 
 body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
     line-height: 1.5;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: 400;
@@ -70,8 +70,8 @@ svg {
 }
 
 main {
-    width: min(90%, 80rem);
-    margin: var(--spacing-medium) auto;
+    height: 100%;
+    overflow: auto;
 }
 
 .menu {
