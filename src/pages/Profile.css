@@ -1,19 +1,53 @@
 .profil {
     display: grid;
-    grid-template-areas:
-        "header header header header"
-        "activity activity activity keydata"
-        "objectif radar score keydata";
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-large);
+}
+
+@media (min-width: 75rem) {
+    .profil {
+        grid-template-columns: 1fr 1fr 1fr minmax(16rem, 1fr);
+    }
 }
 
 .header {
-    grid-area: header;
+    grid-row: 1;
+    grid-column: 1 / -1;
+}
+
+.activity {
+    grid-row: 2;
+    grid-column: 1 / -1;
 }
 
 .keyDatas {
-    grid-area: keydata;
+    grid-row: 3;
+    grid-column: 1 / -1;
 }
 
 .score {
-    grid-area: score;
+    grid-row: 4;
+    grid-column: 3 / 4;
+}
+
+@media (min-width: 75rem) {
+    .header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .activity {
+        grid-column: 1 / 4;
+        grid-row: 2;
+    }
+
+    .keyDatas {
+        grid-row: 2 / 4;
+        grid-column: 4 / -1;
+    }
+
+    .score {
+        grid-row: 3;
+        grid-column: 3 / 4;
+    }
 }

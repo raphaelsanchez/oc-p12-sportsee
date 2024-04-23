@@ -1,4 +1,4 @@
-import { USER_MAIN_DATA } from '../__mock__/data'
+import { USER_ACTIVITY, USER_MAIN_DATA } from '../__mock__/data'
 
 // Set to true to use mocked data
 const useMockedData = true
@@ -33,6 +33,22 @@ export const getUserInfos = async (id) => {
             userScore: data.todayScore || data.score,
         }
     } else {
-        // TODO: Real implementation here
+        // TODO: API implementation here
+    }
+}
+
+export const getUserActivity = async (id) => {
+    if (useMockedData) {
+        const data = USER_ACTIVITY.find((user) => user.userId === id)
+
+        if (!data) {
+            throw new Error(`User with ID ${id} not found.`)
+        }
+
+        return {
+            sessions: data.sessions,
+        }
+    } else {
+        // TODO: API implementation here
     }
 }

@@ -1,5 +1,6 @@
 import Header from '@/components/Header/Header'
 import { useParams } from 'react-router-dom'
+import Activity from '../components/Activity/Activity'
 import KeyDatas from '../components/Keydatas/KeyDatas'
 import Score from '../components/Score/Score'
 import './Profile.css'
@@ -14,6 +15,7 @@ export default function Profile() {
     return (
         <main className="profil">
             <Header userId={Number(id)} />
+            <Activity userId={Number(id)} />
             <KeyDatas userId={Number(id)} />
             <Score userId={Number(id)} />
         </main>

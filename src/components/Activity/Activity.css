@@ -1,12 +1,12 @@
-.score {
+.activity {
     position: relative;
     padding: var(--spacing-large);
     background-color: var(--color-neutral-100);
     border-radius: var(--radius-small);
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 835/320;
 }
 
-.score h2 {
+.activity h2 {
     position: absolute;
 
     margin: 0;
@@ -14,3 +14,7 @@
     font-weight: 500;
     color: var(--color-neutral-900);
 }
+
+/* .activityChart {
+    aspect-ratio: 835 / 320;
+} */
