@@ -59,7 +59,7 @@ export default function AverageSessions({ userId = 0 }) {
     const max = average * 1.6
 
     return (
-        <div className="averageSessions">
+        <section className="averageSessions">
             <h2>Durée moyenne des sessions</h2>
 
             <ResponsiveContainer width="100%" height="100%">
@@ -130,7 +130,7 @@ export default function AverageSessions({ userId = 0 }) {
                     />
                 </LineChart>
             </ResponsiveContainer>
-        </div>
+        </section>
     )
 }
 

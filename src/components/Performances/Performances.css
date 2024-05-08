@@ -8,8 +8,8 @@
 .performance h2 {
     position: absolute;
 
-    top: var(--spacing-large);
-    left: var(--spacing-large);
+    top: var(--spacing-medium);
+    left: var(--spacing-medium);
 
     max-width: 152px;
 
@@ -18,4 +18,11 @@
     font-weight: 500;
     color: var(--color-neutral-0);
     opacity: 0.5;
+}
+
+@media (min-width: 75rem) {
+    .performance h2 {
+        top: var(--spacing-large);
+        left: var(--spacing-large);
+    }
 }

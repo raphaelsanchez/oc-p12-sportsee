@@ -37,9 +37,8 @@ export const getUserInfos = async (id) => {
             userKeyData: data.keyData,
             userScore: data.todayScore || data.score,
         }
-    } else {
-        // TODO: API implementation here
     }
+    // TODO: API implementation here
 }
 
 /**
@@ -59,9 +58,8 @@ export const getUserActivity = async (id) => {
         return {
             sessions: data.sessions,
         }
-    } else {
-        // TODO: API implementation here
     }
+    // TODO: API implementation here
 }
 
 /**
@@ -82,9 +80,8 @@ export const getUserAverageSessions = async (id) => {
         return {
             sessions: data.sessions,
         }
-    } else {
-        // TODO: API implementation here
     }
+    // TODO: API implementation here
 }
 
 export const getUserPerformance = async (id) => {
@@ -99,7 +96,6 @@ export const getUserPerformance = async (id) => {
             kind: data.kind,
             kindValue: data.data,
         }
-    } else {
-        // TODO: API implementation here
     }
+    // TODO: API implementation here
 }

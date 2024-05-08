@@ -11,7 +11,7 @@ export default function Nav() {
     return (
         <nav className="nav" aria-label="Menu principal">
             <Link className="home-link" to="/">
-                <img src={logo} alt="Logo SportSee" />
+                <img className="logo" src={logo} alt="Logo SportSee" />
             </Link>
             <ul className="menu">
                 <li className="menu-item">

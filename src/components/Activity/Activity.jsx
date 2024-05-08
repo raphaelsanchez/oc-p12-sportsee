@@ -27,7 +27,7 @@ export default function Activity({ userId = 0 }) {
     }, [userId])
 
     // Set number of days and offset of sessions
-    const numDays = 10
+    const numDays = 7
     const offset = 0
 
     // Set array of days

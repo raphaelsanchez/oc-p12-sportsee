@@ -1,3 +1,18 @@
+.header {
+    display: grid;
+    gap: var(--spacing-medium);
+    margin-block: var(--spacing-medium);
+}
+
+.header :where(h1, p) {
+    margin: 0;
+}
+
+.header h1 {
+    font-size: clamp(2.2rem, 2vw + 1rem, 3.2rem);
+    line-height: 1.1;
+}
+
 .header p {
     font-size: 1.125rem;
 }

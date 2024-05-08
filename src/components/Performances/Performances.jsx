@@ -45,7 +45,7 @@ export default function Performances({ userId = 0 }) {
     }
 
     return (
-        <div className="performance">
+        <section className="performance">
             <h2 className="sr-only">Performances</h2>
             <ResponsiveContainer width="100%" height="100%">
                 <RadarChart
@@ -75,7 +75,7 @@ export default function Performances({ userId = 0 }) {
                     />
                 </RadarChart>
             </ResponsiveContainer>
-        </div>
+        </section>
     )
 }
 

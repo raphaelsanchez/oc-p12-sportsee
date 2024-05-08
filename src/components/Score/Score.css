@@ -1,6 +1,6 @@
 .score {
     position: relative;
-    padding: var(--spacing-large);
+    padding: var(--spacing-medium);
     background-color: var(--color-neutral-100);
     border-radius: var(--radius-small);
     aspect-ratio: 1 / 1;
@@ -9,8 +9,8 @@
 .score h2 {
     position: absolute;
 
-    top: var(--spacing-large);
-    left: var(--spacing-large);
+    top: var(--spacing-medium);
+    left: var(--spacing-medium);
 
     margin: 0;
     font-size: 1rem;
@@ -20,4 +20,15 @@
 
 .score .recharts-surface {
     background-image: radial-gradient(white, white 52%, transparent 52%);
+}
+
+@media (min-width: 75rem) {
+    .score {
+        padding: var(--spacing-large);
+    }
+
+    .score h2 {
+        top: var(--spacing-large);
+        left: var(--spacing-large);
+    }
 }

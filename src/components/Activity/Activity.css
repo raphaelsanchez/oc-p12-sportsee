@@ -1,21 +1,33 @@
 .activity {
     position: relative;
-    padding: var(--spacing-large);
+    padding: var(--spacing-medium);
     background-color: var(--color-neutral-100);
     border-radius: var(--radius-small);
-    aspect-ratio: 835/320;
+    height: 100%;
 }
 
 .activity h2 {
     position: absolute;
 
-    top: var(--spacing-large);
-    left: var(--spacing-large);
+    top: calc(var(--spacing-medium) + 0.35em);
+    left: var(--spacing-medium);
 
     margin: 0;
     font-size: 1rem;
     font-weight: 500;
     color: var(--color-neutral-900);
+}
+
+@media (min-width: 75rem) {
+    .activity {
+        padding: var(--spacing-large);
+    }
+
+    .activity h2 {
+        font-size: 1.25rem;
+        top: var(--spacing-large);
+        left: var(--spacing-large);
+    }
 }
 
 /* .activityChart {

@@ -15,6 +15,12 @@
     --radius-small: 0.5rem;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 a {
     font-weight: 500;
     color: currentColor;
@@ -53,11 +59,6 @@ body {
     color: var(--color-neutral-900);
 }
 
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-}
-
 h1 strong {
     color: var(--color-primary);
 }
@@ -71,7 +72,18 @@ svg {
 
 main {
     height: 100%;
-    overflow: auto;
+    overflow: clip;
+    padding: var(--spacing-medium);
+}
+
+main > * {
+    min-height: 100%;
+}
+
+@media (min-width: 75rem) {
+    main {
+        padding: var(--spacing-large);
+    }
 }
 
 .menu {
