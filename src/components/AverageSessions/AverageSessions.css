@@ -20,6 +20,10 @@
     opacity: 0.5;
 }
 
+.averageSessions .recharts-cartesian-axis {
+    position: absolute;
+}
+
 .averageSessions .recharts-cartesian-axis-tick:last-of-type {
     display: none;
 }
@@ -28,12 +32,13 @@
     fill: #ffffff !important;
 }
 
-.averageSessions .toolTip {
+.averageSessions .custom-tooltip {
     color: #020203;
     background: #ffffff;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
     font-weight: bold;
+    line-height: 0;
 }
 
 .averageSessions .cursorShadow {

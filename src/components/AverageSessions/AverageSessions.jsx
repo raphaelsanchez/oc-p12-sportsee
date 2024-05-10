@@ -4,12 +4,81 @@ import { useEffect, useState } from 'react'
 import {
     Line,
     LineChart,
+    Rectangle,
     ResponsiveContainer,
     Tooltip,
     XAxis,
     YAxis,
 } from 'recharts'
 import './AverageSessions.css'
+
+/**
+ * CustomizedTooltip component.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.active - Indicates if the tooltip is active.
+ * @param {Array} props.payload - The data payload for the tooltip.
+ * @returns {JSX.Element|null} The rendered CustomizedTooltip component.
+ */
+function CustomizedTooltip({ active, payload }) {
+    if (active && payload) {
+        return (
+            <div className="custom-tooltip">
+                <p>{`${payload[0].value}`} min</p>
+            </div>
+        )
+    }
+    return null
+}
+CustomizedTooltip.propTypes = {
+    active: PropTypes.bool,
+    payload: PropTypes.array,
+}
+
+/**
+ * Renders a customized cursor component.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.points - The array of points.
+ * @returns {JSX.Element} The customized cursor component.
+ */
+function CustomizedCursor({ points }) {
+    return (
+        <Rectangle
+            fill="black"
+            opacity={0.1}
+            x={points[1].x}
+            width={500}
+            height={500}
+        />
+    )
+}
+CustomizedCursor.propTypes = {
+    points: PropTypes.array,
+}
+
+const ActiveDot = (props) => {
+    const { cx, cy, stroke } = props
+
+    return (
+        <g>
+            <circle cx={cx} cy={cy} r={10} fill="white" fillOpacity={0.3} />
+            <circle
+                cx={cx}
+                cy={cy}
+                r={4}
+                stroke={stroke}
+                strokeWidth={2}
+                fill="white"
+            />
+        </g>
+    )
+}
+ActiveDot.propTypes = {
+    cx: PropTypes.number,
+    cy: PropTypes.number,
+    stroke: PropTypes.string,
+}
 
 export default function AverageSessions({ userId = 0 }) {
     const [averageSessions, setAverageSessions] = useState({ sessions: [] })
@@ -89,25 +158,6 @@ export default function AverageSessions({ userId = 0 }) {
                         hide={true}
                         domain={[`dataMin-${min}`, `dataMax+${max}`]}
                     />
-                    <Tooltip
-                        itemStyle={{
-                            color: 'black',
-                            fontSize: 11,
-                            fontWeight: 500,
-                        }}
-                        formatter={(value, name, unit) => [value, unit]}
-                        labelStyle={{ display: 'none' }}
-                        cursor={{
-                            stroke: 'black',
-                            strokeOpacity: 0.1,
-                            strokeWidth: 0,
-                        }}
-                        contentStyle={{
-                            backgroundColor: 'white',
-                            border: 'none',
-                            padding: '10px',
-                        }}
-                    />
                     <defs>
                         <linearGradient
                             id="gradient"
@@ -123,10 +173,17 @@ export default function AverageSessions({ userId = 0 }) {
                     <Line
                         type="natural"
                         dataKey="sessionLength"
-                        stroke="url(#gradient)"
                         dot={false}
                         strokeWidth={2}
                         unit=" min"
+                        style={{ stroke: 'url(#gradient)' }}
+                        activeDot={<ActiveDot />}
+                    />
+
+                    <Tooltip
+                        className="custom-tooltip"
+                        content={<CustomizedTooltip />}
+                        cursor={<CustomizedCursor />}
                     />
                 </LineChart>
             </ResponsiveContainer>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import {
     PolarAngleAxis,
     PolarGrid,
+    PolarRadiusAxis,
     Radar,
     RadarChart,
     ResponsiveContainer,
@@ -29,19 +30,26 @@ export default function Performances({ userId = 0 }) {
 
     // Check if userPerformances[0] exists before accessing its properties
     let transformedData = []
-    if (
-        userPerformances &&
-        userPerformances.length > 0 &&
-        userPerformances[0]
-    ) {
-        const kind = userPerformances[0].kind
+
+    if (userPerformances[0] && userPerformances[0].kindValue) {
+        const order = {
+            Intensité: 1,
+            Vitesse: 2,
+            Force: 3,
+            Endurance: 4,
+            Energie: 5,
+            Cardio: 6,
+        }
+
         const data = userPerformances[0].kindValue
 
-        // Transform data
-        transformedData = data.map((item) => ({
-            kind: kind[item.kind],
-            value: item.value,
-        }))
+        // Transform and sort data
+        transformedData = data
+            .map((item) => ({
+                kind: Object.keys(order)[item.kind - 1],
+                value: item.value,
+            }))
+            .sort((a, b) => order[a.kind] - order[b.kind])
     }
 
     return (
@@ -54,14 +62,19 @@ export default function Performances({ userId = 0 }) {
                     cy="50%"
                     outerRadius="65%"
                 >
-                    <PolarGrid radialLines={false} />
+                    <PolarGrid gridType="hexagon" radialLines={false} />
+                    <PolarRadiusAxis
+                        tick={false}
+                        axisLine={false}
+                        tickCount={6}
+                    />
                     <PolarAngleAxis
                         dataKey="kind"
                         tickSize={10}
-                        startAngle={90}
+                        startAngle={60}
                         tick={{
                             fill: 'white',
-                            fontSize: 12,
+                            fontSize: '0.65rem',
                             fontWeight: 500,
                             y: 200,
                         }}
