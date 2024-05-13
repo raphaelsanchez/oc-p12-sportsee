@@ -1,4 +1,4 @@
-import { getUserAverageSessions } from '@/api/fetchData'
+import { getUserData } from '@/api/getUserData'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import {
@@ -10,7 +10,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts'
-import Loader from '../Loader/Loader'
 import './AverageSessions.css'
 
 /**
@@ -87,18 +86,27 @@ ActiveDot.propTypes = {
     stroke: PropTypes.string,
 }
 
+/**
+ * Renders the AverageSessions component.
+ * @param {Object} props - The component props.
+ * @param {number} props.userId - The user ID.
+ * @returns {JSX.Element} The rendered AverageSessions component.
+ */
 export default function AverageSessions({ userId = 0 }) {
-    const [averageSessions, setAverageSessions] = useState({ sessions: [] })
-    const [isLoading, setIsLoading] = useState(true)
+    const [userAverageSessions, setUserAverageSessions] = useState({
+        sessions: [],
+    })
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true)
-            const averageSessions = await getUserAverageSessions(userId)
-            setAverageSessions({
-                sessions: averageSessions?.sessions,
-            })
-            setIsLoading(false)
+            try {
+                const data = await getUserData(userId)
+                setUserAverageSessions({
+                    sessions: data?.userAverageSessions,
+                })
+            } catch (error) {
+                console.error('Failed to fetch user average sessions:', error)
+            }
         }
         fetchData()
     }, [userId])
@@ -110,15 +118,15 @@ export default function AverageSessions({ userId = 0 }) {
     const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
     // Attibute a session length to each day
-    let sessions = averageSessions.sessions
-    if (averageSessions.sessions) {
+    let sessions = userAverageSessions.sessions
+    if (userAverageSessions.sessions) {
         sessions = [
-            { day: 'Jour précédent', ...averageSessions.sessions[0] },
+            { day: 'Jour précédent', ...userAverageSessions.sessions[0] },
             ...days
                 .map((day, index) => {
-                    if (averageSessions.sessions[index + offset]) {
+                    if (userAverageSessions.sessions[index + offset]) {
                         return {
-                            ...averageSessions.sessions[index + offset],
+                            ...userAverageSessions.sessions[index + offset],
                             day: day,
                         }
                     } else {
@@ -128,8 +136,8 @@ export default function AverageSessions({ userId = 0 }) {
                 .filter(Boolean),
             {
                 day: 'Jour suivant',
-                ...averageSessions.sessions[
-                    averageSessions.sessions.length - 1
+                ...userAverageSessions.sessions[
+                    userAverageSessions.sessions.length - 1
                 ],
             },
         ]
@@ -148,66 +156,63 @@ export default function AverageSessions({ userId = 0 }) {
     return (
         <section className="averageSessions">
             <h2>Durée moyenne des sessions</h2>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <ResponsiveContainer width="100%" height="100%">
-                    <LineChart
-                        data={sessions}
-                        margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
+
+            <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                    data={sessions}
+                    margin={{
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                    }}
+                >
+                    <XAxis
+                        dataKey="day"
+                        tickLine={false}
+                        axisLine={false}
+                        tickMargin={0}
+                        tick={{
+                            fill: 'white',
+                            fontSize: 12,
+                            fontWeight: 500,
                         }}
-                    >
-                        <XAxis
-                            dataKey="day"
-                            tickLine={false}
-                            axisLine={false}
-                            tickMargin={0}
-                            tick={{
-                                fill: 'white',
-                                fontSize: 12,
-                                fontWeight: 500,
-                            }}
-                            padding={{ left: -20, right: -20 }}
-                        />
+                        padding={{ left: -20, right: -20 }}
+                    />
 
-                        <YAxis
-                            hide={true}
-                            domain={[`dataMin-${min}`, `dataMax+${max}`]}
-                        />
-                        <defs>
-                            <linearGradient
-                                id="gradient"
-                                x1="0"
-                                y1="0"
-                                x2="1"
-                                y2="0"
-                            >
-                                <stop offset="0%" stopColor="#ffffff33" />
-                                <stop offset="66%" stopColor="#ffffffff" />
-                            </linearGradient>
-                        </defs>
-                        <Line
-                            type="natural"
-                            dataKey="sessionLength"
-                            dot={false}
-                            strokeWidth={2}
-                            unit=" min"
-                            style={{ stroke: 'url(#gradient)' }}
-                            activeDot={<ActiveDot />}
-                        />
+                    <YAxis
+                        hide={true}
+                        domain={[`dataMin-${min}`, `dataMax+${max}`]}
+                    />
+                    <defs>
+                        <linearGradient
+                            id="gradient"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                        >
+                            <stop offset="0%" stopColor="#ffffff33" />
+                            <stop offset="66%" stopColor="#ffffffff" />
+                        </linearGradient>
+                    </defs>
+                    <Line
+                        type="natural"
+                        dataKey="sessionLength"
+                        dot={false}
+                        strokeWidth={2}
+                        unit=" min"
+                        style={{ stroke: 'url(#gradient)' }}
+                        activeDot={<ActiveDot />}
+                    />
 
-                        <Tooltip
-                            className="custom-tooltip"
-                            content={<CustomizedTooltip />}
-                            cursor={<CustomizedCursor />}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            )}
+                    <Tooltip
+                        className="custom-tooltip"
+                        content={<CustomizedTooltip />}
+                        cursor={<CustomizedCursor />}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
         </section>
     )
 }

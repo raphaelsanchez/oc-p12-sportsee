@@ -1,4 +1,4 @@
-import { getUserInfos } from '@/api/fetchData'
+import { getUserData } from '@/api/getUserData'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import './Header.css'
@@ -12,14 +12,16 @@ import './Header.css'
  * @returns {JSX.Element} The rendered component.
  */
 export default function Header({ userId }) {
-    const [user, setUser] = useState({})
+    const [userData, setUserData] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
-            const userData = await getUserInfos(userId)
-            setUser({
-                firstName: userData?.userInfos?.firstName,
-            })
+            try {
+                const userData = await getUserData(userId)
+                setUserData(userData)
+            } catch (error) {
+                console.error('Failed to fetch user informations:', error)
+            }
         }
         fetchData()
     }, [userId])
@@ -27,7 +29,8 @@ export default function Header({ userId }) {
     return (
         <header className="header">
             <h1>
-                Bonjour <strong>{user.firstName}</strong>
+                Bonjour{' '}
+                <strong>{userData?.userInfo.userInfos.firstName}</strong>
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         </header>
