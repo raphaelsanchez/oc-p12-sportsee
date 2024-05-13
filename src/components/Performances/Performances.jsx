@@ -9,6 +9,7 @@ import {
     RadarChart,
     ResponsiveContainer,
 } from 'recharts'
+import Loader from '../Loader/Loader'
 import './Performances.css'
 
 /**
@@ -19,11 +20,14 @@ import './Performances.css'
  */
 export default function Performances({ userId = 0 }) {
     const [userPerformances, setUserPerformances] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             const userPerformancesData = await getUserPerformance(userId)
             setUserPerformances([userPerformancesData])
+            setIsLoading(false)
         }
         fetchData()
     }, [userId])
@@ -55,39 +59,43 @@ export default function Performances({ userId = 0 }) {
     return (
         <section className="performance">
             <h2 className="sr-only">Performances</h2>
-            <ResponsiveContainer width="100%" height="100%">
-                <RadarChart
-                    data={transformedData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius="65%"
-                >
-                    <PolarGrid gridType="hexagon" radialLines={false} />
-                    <PolarRadiusAxis
-                        tick={false}
-                        axisLine={false}
-                        tickCount={6}
-                    />
-                    <PolarAngleAxis
-                        dataKey="kind"
-                        tickSize={10}
-                        startAngle={60}
-                        tick={{
-                            fill: 'white',
-                            fontSize: '0.65rem',
-                            fontWeight: 500,
-                            y: 200,
-                        }}
-                    />
-                    <Radar
-                        name="Mike"
-                        dataKey="value"
-                        stroke="rgba(255, 1, 1, 0.7)"
-                        fill="rgba(255, 1, 1, 0.7)"
-                        fillOpacity={0.6}
-                    />
-                </RadarChart>
-            </ResponsiveContainer>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart
+                        data={transformedData}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius="65%"
+                    >
+                        <PolarGrid gridType="hexagon" radialLines={false} />
+                        <PolarRadiusAxis
+                            tick={false}
+                            axisLine={false}
+                            tickCount={6}
+                        />
+                        <PolarAngleAxis
+                            dataKey="kind"
+                            tickSize={10}
+                            startAngle={60}
+                            tick={{
+                                fill: 'white',
+                                fontSize: '0.65rem',
+                                fontWeight: 500,
+                                y: 200,
+                            }}
+                        />
+                        <Radar
+                            name="Mike"
+                            dataKey="value"
+                            stroke="rgba(255, 1, 1, 0.7)"
+                            fill="rgba(255, 1, 1, 0.7)"
+                            fillOpacity={0.6}
+                        />
+                    </RadarChart>
+                </ResponsiveContainer>
+            )}
         </section>
     )
 }

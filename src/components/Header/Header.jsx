@@ -18,7 +18,7 @@ export default function Header({ userId }) {
         const fetchData = async () => {
             const userData = await getUserInfos(userId)
             setUser({
-                firstName: userData?.userInfos.firstName,
+                firstName: userData?.userInfos?.firstName,
             })
         }
         fetchData()

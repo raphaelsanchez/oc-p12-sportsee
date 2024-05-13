@@ -7,15 +7,19 @@ import {
     RadialBarChart,
     ResponsiveContainer,
 } from 'recharts'
+import Loader from '../Loader/Loader'
 import './Score.css'
 
 export default function Score({ userId }) {
     const [score, setScore] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             const userData = await getUserInfos(userId)
             setScore(userData?.userScore)
+            setIsLoading(false)
         }
         fetchData()
     }, [userId])
@@ -29,53 +33,57 @@ export default function Score({ userId }) {
     return (
         <section className="score">
             <h2>Score</h2>
-            <ResponsiveContainer width="100%" height="100%">
-                <RadialBarChart
-                    data={scoreValue}
-                    innerRadius={200}
-                    barSize={10}
-                    startAngle={90}
-                    endAngle={440}
-                >
-                    <PolarAngleAxis
-                        type="number"
-                        domain={[0, 100]}
-                        tick={false}
-                    />
-                    <RadialBar
-                        dataKey="value"
-                        cornerRadius={14}
-                        fill={'#FF0000'}
-                    />
-                    <text
-                        x="50%"
-                        y="42%"
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        fontSize="26"
-                        fontWeight="700"
-                        fill="black"
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                    <RadialBarChart
+                        data={scoreValue}
+                        innerRadius={200}
+                        barSize={10}
+                        startAngle={90}
+                        endAngle={440}
                     >
-                        {newScore}%
-                    </text>
-                    <text
-                        x="50%"
-                        y="46%"
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        fontSize="16"
-                        fill="gray"
-                        fontWeight="500"
-                    >
-                        <tspan x="50%" dy="1.2em">
-                            de votre
-                        </tspan>
-                        <tspan x="50%" dy="1.2em">
-                            objectif
-                        </tspan>
-                    </text>
-                </RadialBarChart>
-            </ResponsiveContainer>
+                        <PolarAngleAxis
+                            type="number"
+                            domain={[0, 100]}
+                            tick={false}
+                        />
+                        <RadialBar
+                            dataKey="value"
+                            cornerRadius={14}
+                            fill={'#FF0000'}
+                        />
+                        <text
+                            x="50%"
+                            y="42%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            fontSize="26"
+                            fontWeight="700"
+                            fill="black"
+                        >
+                            {newScore}%
+                        </text>
+                        <text
+                            x="50%"
+                            y="46%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            fontSize="16"
+                            fill="gray"
+                            fontWeight="500"
+                        >
+                            <tspan x="50%" dy="1.2em">
+                                de votre
+                            </tspan>
+                            <tspan x="50%" dy="1.2em">
+                                objectif
+                            </tspan>
+                        </text>
+                    </RadialBarChart>
+                </ResponsiveContainer>
+            )}
         </section>
     )
 }

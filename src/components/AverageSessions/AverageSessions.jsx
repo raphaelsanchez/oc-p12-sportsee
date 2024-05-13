@@ -10,6 +10,7 @@ import {
     XAxis,
     YAxis,
 } from 'recharts'
+import Loader from '../Loader/Loader'
 import './AverageSessions.css'
 
 /**
@@ -57,9 +58,15 @@ CustomizedCursor.propTypes = {
     points: PropTypes.array,
 }
 
-const ActiveDot = (props) => {
-    const { cx, cy, stroke } = props
-
+/**
+ * Renders an active dot component.
+ * @param {Object} props - The component props.
+ * @param {number} props.cx - The x-coordinate of the center of the circle.
+ * @param {number} props.cy - The y-coordinate of the center of the circle.
+ * @param {string} props.stroke - The color of the circle's stroke.
+ * @returns {JSX.Element} The rendered active dot component.
+ */
+const ActiveDot = ({ cx, cy, stroke }) => {
     return (
         <g>
             <circle cx={cx} cy={cy} r={10} fill="white" fillOpacity={0.3} />
@@ -82,13 +89,16 @@ ActiveDot.propTypes = {
 
 export default function AverageSessions({ userId = 0 }) {
     const [averageSessions, setAverageSessions] = useState({ sessions: [] })
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             const averageSessions = await getUserAverageSessions(userId)
             setAverageSessions({
                 sessions: averageSessions?.sessions,
             })
+            setIsLoading(false)
         }
         fetchData()
     }, [userId])
@@ -100,14 +110,22 @@ export default function AverageSessions({ userId = 0 }) {
     const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
     // Attibute a session length to each day
-    let sessions = []
+    let sessions = averageSessions.sessions
     if (averageSessions.sessions) {
         sessions = [
             { day: 'Jour précédent', ...averageSessions.sessions[0] },
-            ...days.map((day, index) => ({
-                ...averageSessions.sessions[index + offset],
-                day: day,
-            })),
+            ...days
+                .map((day, index) => {
+                    if (averageSessions.sessions[index + offset]) {
+                        return {
+                            ...averageSessions.sessions[index + offset],
+                            day: day,
+                        }
+                    } else {
+                        return null
+                    }
+                })
+                .filter(Boolean),
             {
                 day: 'Jour suivant',
                 ...averageSessions.sessions[
@@ -130,63 +148,66 @@ export default function AverageSessions({ userId = 0 }) {
     return (
         <section className="averageSessions">
             <h2>Durée moyenne des sessions</h2>
-
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                    data={sessions}
-                    margin={{
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
-                    }}
-                >
-                    <XAxis
-                        dataKey="day"
-                        tickLine={false}
-                        axisLine={false}
-                        tickMargin={0}
-                        tick={{
-                            fill: 'white',
-                            fontSize: 12,
-                            fontWeight: 500,
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                        data={sessions}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
                         }}
-                        padding={{ left: -20, right: -20 }}
-                    />
+                    >
+                        <XAxis
+                            dataKey="day"
+                            tickLine={false}
+                            axisLine={false}
+                            tickMargin={0}
+                            tick={{
+                                fill: 'white',
+                                fontSize: 12,
+                                fontWeight: 500,
+                            }}
+                            padding={{ left: -20, right: -20 }}
+                        />
 
-                    <YAxis
-                        hide={true}
-                        domain={[`dataMin-${min}`, `dataMax+${max}`]}
-                    />
-                    <defs>
-                        <linearGradient
-                            id="gradient"
-                            x1="0"
-                            y1="0"
-                            x2="1"
-                            y2="0"
-                        >
-                            <stop offset="0%" stopColor="#ffffff33" />
-                            <stop offset="66%" stopColor="#ffffffff" />
-                        </linearGradient>
-                    </defs>
-                    <Line
-                        type="natural"
-                        dataKey="sessionLength"
-                        dot={false}
-                        strokeWidth={2}
-                        unit=" min"
-                        style={{ stroke: 'url(#gradient)' }}
-                        activeDot={<ActiveDot />}
-                    />
+                        <YAxis
+                            hide={true}
+                            domain={[`dataMin-${min}`, `dataMax+${max}`]}
+                        />
+                        <defs>
+                            <linearGradient
+                                id="gradient"
+                                x1="0"
+                                y1="0"
+                                x2="1"
+                                y2="0"
+                            >
+                                <stop offset="0%" stopColor="#ffffff33" />
+                                <stop offset="66%" stopColor="#ffffffff" />
+                            </linearGradient>
+                        </defs>
+                        <Line
+                            type="natural"
+                            dataKey="sessionLength"
+                            dot={false}
+                            strokeWidth={2}
+                            unit=" min"
+                            style={{ stroke: 'url(#gradient)' }}
+                            activeDot={<ActiveDot />}
+                        />
 
-                    <Tooltip
-                        className="custom-tooltip"
-                        content={<CustomizedTooltip />}
-                        cursor={<CustomizedCursor />}
-                    />
-                </LineChart>
-            </ResponsiveContainer>
+                        <Tooltip
+                            className="custom-tooltip"
+                            content={<CustomizedTooltip />}
+                            cursor={<CustomizedCursor />}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            )}
         </section>
     )
 }
