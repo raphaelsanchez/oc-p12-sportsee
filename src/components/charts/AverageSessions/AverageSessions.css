@@ -2,6 +2,7 @@
     position: relative;
     background-color: var(--color-primary);
     border-radius: var(--radius-small);
+    padding: 0;
     aspect-ratio: 1 / 1;
 }
 
@@ -20,13 +21,13 @@
     opacity: 0.5;
 }
 
-.averageSessions .recharts-cartesian-axis {
+/* .averageSessions .recharts-cartesian-axis {
     position: absolute;
-}
+} */
 
-.averageSessions .recharts-cartesian-axis-tick:last-of-type {
+/* .averageSessions .recharts-cartesian-axis-tick:last-of-type {
     display: none;
-}
+} */
 
 .averageSessions .dot {
     fill: #ffffff !important;

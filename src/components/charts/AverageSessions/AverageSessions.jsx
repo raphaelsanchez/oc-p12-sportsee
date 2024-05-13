@@ -111,39 +111,47 @@ export default function AverageSessions({ userId = 0 }) {
         fetchData()
     }, [userId])
 
-    // Set number of days and offset of sessions
-    const offset = 0
-
-    // Set array of days
-    const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
-
-    // Attibute a session length to each day
-    let sessions = userAverageSessions.sessions
-    if (userAverageSessions.sessions) {
-        sessions = [
-            { day: 'Jour précédent', ...userAverageSessions.sessions[0] },
-            ...days
-                .map((day, index) => {
-                    if (userAverageSessions.sessions[index + offset]) {
-                        return {
-                            ...userAverageSessions.sessions[index + offset],
-                            day: day,
-                        }
-                    } else {
-                        return null
-                    }
-                })
-                .filter(Boolean),
-            {
-                day: 'Jour suivant',
-                ...userAverageSessions.sessions[
-                    userAverageSessions.sessions.length - 1
-                ],
-            },
-        ]
+    // format the x-axis labels to display the first letter of the day
+    const xAxisFormatter = (day) => {
+        switch (day) {
+            case 1:
+                return 'L'
+            case 2:
+                return 'M'
+            case 3:
+                return 'M'
+            case 4:
+                return 'J'
+            case 5:
+                return 'V'
+            case 6:
+                return 'S'
+            case 7:
+                return 'D'
+            default:
+                return ''
+        }
     }
 
-    // Calculate the time average
+    // Attibute a session length to each day
+    let sessions = userAverageSessions.sessions.map((session) => {
+        return {
+            day: session.day,
+            sessionLength: session.sessionLength,
+        }
+    })
+
+    // Add an additional data at the beginning and at the end to make the graph line overflow
+    if (sessions && sessions.length > 0) {
+        const firstSession = { ...sessions[0] }
+        firstSession.day -= 1
+        sessions.unshift(firstSession)
+        const lastSession = { ...sessions[sessions.length - 1] }
+        lastSession.day += 1
+        sessions.push(lastSession)
+    }
+
+    // Calculate the session average
     const average =
         sessions.reduce((sum, session) => sum + session.sessionLength, 0) /
         sessions.length
@@ -162,22 +170,23 @@ export default function AverageSessions({ userId = 0 }) {
                     data={sessions}
                     margin={{
                         top: 0,
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
+                        right: -10,
+                        left: -10,
+                        bottom: 10,
                     }}
                 >
                     <XAxis
+                        dy={9}
                         dataKey="day"
+                        tickFormatter={xAxisFormatter}
                         tickLine={false}
                         axisLine={false}
-                        tickMargin={0}
                         tick={{
                             fill: 'white',
                             fontSize: 12,
                             fontWeight: 500,
                         }}
-                        padding={{ left: -20, right: -20 }}
+                        // tickMargin={-10}
                     />
 
                     <YAxis
