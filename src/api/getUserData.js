@@ -3,7 +3,7 @@ import API_URLS from './apiUrls'
 import { getMockedUserData } from './mockData'
 
 // Set this variable to true to use mocked data
-const useMockedData = false
+const useMockedData = import.meta.env.VITE_APP_USE_MOCKED_DATA === 'true'
 
 /**
  * Retrieves all user data.

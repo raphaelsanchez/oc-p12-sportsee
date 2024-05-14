@@ -1,5 +1,5 @@
 // The base URL for the API
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
 // The API endpoints
 const API_URLS = {

@@ -1,13 +1,13 @@
+import { getUserData } from '@/api/getUserData'
 import Header from '@/components/Header/Header'
+import Loader from '@/components/Loader/Loader'
+import Activity from '@/components/charts/Activity/Activity'
+import AverageSessions from '@/components/charts/AverageSessions/AverageSessions'
+import KeyDatas from '@/components/charts/Keydatas/KeyDatas'
+import Performances from '@/components/charts/Performances/Performances'
+import Score from '@/components/charts/Score/Score'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getUserData } from '../api/getUserData'
-import Loader from '../components/Loader/Loader'
-import Performances from '../components/charts/Performances/Performances'
-import Score from '../components/charts/Score/Score'
-import Activity from '../components/charts/Activity/Activity'
-import AverageSessions from '../components/charts/AverageSessions/AverageSessions'
-import KeyDatas from '../components/charts/Keydatas/KeyDatas'
 import './Profile.css'
 
 /**
@@ -22,6 +22,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoading(true)
                 await getUserData(Number(id))
             } catch (error) {
                 console.error(error)
@@ -34,7 +35,7 @@ export default function Profile() {
     }, [id])
 
     if (isLoading) {
-        return <Loader /> // Remplacez par votre composant de chargement
+        return <Loader />
     }
 
     return (
