@@ -1,4 +1,4 @@
-import Icone from '@/components/Icone/Icone'
+import Icone from '@/components/Icones/Icones'
 import { Link } from 'react-router-dom'
 import './SideNav.css'
 

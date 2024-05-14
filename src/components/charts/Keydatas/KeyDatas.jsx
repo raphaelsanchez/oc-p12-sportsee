@@ -1,9 +1,15 @@
-import { getUserInfos } from '@/api/fetchData'
+import { getUserData } from '@/api/getUserData'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import './KeyDatas.css'
 import { KeyDatasCard as Card } from './KeyDatasCard'
 
+/**
+ * Renders the KeyDatas component.
+ * @param {Object} props - The component props.
+ * @param {number} props.userId - The user ID.
+ * @returns {JSX.Element} The KeyDatas component.
+ */
 export default function KeyDatas({ userId = 0 }) {
     const [keyData, setKeyData] = useState({
         calorieCount: 0,
@@ -14,13 +20,18 @@ export default function KeyDatas({ userId = 0 }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const userData = await getUserInfos(userId)
-            setKeyData({
-                calorieCount: userData?.userKeyData.calorieCount,
-                proteinCount: userData?.userKeyData.proteinCount,
-                carbohydrateCount: userData?.userKeyData.carbohydrateCount,
-                lipidCount: userData?.userKeyData.lipidCount,
-            })
+            try {
+                const userData = await getUserData(userId)
+                setKeyData({
+                    calorieCount: userData?.userInfo?.userKeyData.calorieCount,
+                    proteinCount: userData?.userInfo?.userKeyData.proteinCount,
+                    carbohydrateCount:
+                        userData?.userInfo?.userKeyData.carbohydrateCount,
+                    lipidCount: userData?.userInfo?.userKeyData.lipidCount,
+                })
+            } catch (error) {
+                console.error('Failed to fetch user key data:', error)
+            }
         }
         fetchData()
     }, [userId])

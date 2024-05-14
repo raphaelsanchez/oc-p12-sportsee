@@ -1,5 +1,5 @@
+import Icone from '@/components/Icones/Icones'
 import PropTypes from 'prop-types'
-import Icone from '../Icone/Icone'
 
 export function KeyDatasCard({
     title = '',

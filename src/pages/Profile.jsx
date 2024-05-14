@@ -1,10 +1,13 @@
+import { getUserData } from '@/api/getUserData'
 import Header from '@/components/Header/Header'
+import Loader from '@/components/Loader/Loader'
+import Activity from '@/components/charts/Activity/Activity'
+import AverageSessions from '@/components/charts/AverageSessions/AverageSessions'
+import KeyDatas from '@/components/charts/Keydatas/KeyDatas'
+import Performances from '@/components/charts/Performances/Performances'
+import Score from '@/components/charts/Score/Score'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Activity from '../components/Activity/Activity'
-import AverageSessions from '../components/AverageSessions/AverageSessions'
-import KeyDatas from '../components/Keydatas/KeyDatas'
-import Performances from '../components/Performances/Performances'
-import Score from '../components/Score/Score'
 import './Profile.css'
 
 /**
@@ -14,6 +17,27 @@ import './Profile.css'
  */
 export default function Profile() {
     const { id } = useParams()
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setIsLoading(true)
+                await getUserData(Number(id))
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchData()
+    }, [id])
+
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <main>
             <div className="profil">
