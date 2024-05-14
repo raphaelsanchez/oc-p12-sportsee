@@ -1,5 +1,6 @@
 import App from '@/layouts/App'
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
 
 /**
@@ -20,6 +21,14 @@ export function Router() {
                 {
                     path: '/user/:id',
                     element: <Profile />,
+                },
+                {
+                    path: '/404',
+                    element: <NotFound />,
+                },
+                {
+                    path: '*',
+                    element: <NotFound />,
                 },
             ],
         },

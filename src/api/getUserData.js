@@ -25,6 +25,11 @@ export const getUserData = async (id) => {
     const [userInfo, userActivity, userAverageSessions, userPerformance] =
         await Promise.all(urls.map((url) => fetchData(url)))
 
+    // Check if the user was found
+    if (!userInfo || !userInfo.data || !userInfo.data.id) {
+        throw new Error('User not found')
+    }
+
     return {
         userInfo: {
             userId: userInfo.data.id,
