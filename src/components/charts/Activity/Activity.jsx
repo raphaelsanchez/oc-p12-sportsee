@@ -30,7 +30,7 @@ function getSessionData(userActivity, numDays = 10, offset = 0) {
     if (userActivity.sessions && userActivity.sessions.length > 0) {
         sessions = days.map((day, index) => ({
             ...userActivity.sessions[index + offset],
-            day: day, // Attribution de la session au jour de la semaine
+            day: day, // Add day attribute
         }))
     }
 
@@ -56,10 +56,6 @@ export default function Activity({ userId = 0 }) {
     const [userActivity, setUserActivity] = useState({ sessions: [] })
 
     useEffect(() => {
-        /**
-         * Fetches user activity data.
-         * @returns {Promise<void>} - A promise that resolves when the data is fetched.
-         */
         const fetchData = async () => {
             try {
                 const userActivity = await getUserData(userId)

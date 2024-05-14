@@ -19,12 +19,21 @@ const SvgIcon = ({ children, className }) => (
     </svg>
 )
 
+// PropTypes definitions
+SvgIcon.propTypes = {
+    children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+}
+
 /**
  * Renders an icon based on the provided type.
  *
  * @param {Object} props - The component props.
  * @param {string} props.type - The type of the icon.
  * @returns {JSX.Element} The rendered icon component.
+ *
+ * @example
+ * <Icones type="yoga" color="red" />
  */
 export default function Icones({
     className = 'icon',
@@ -166,11 +175,6 @@ export default function Icones({
 }
 
 // PropTypes definitions
-SvgIcon.propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-}
-
 Icones.propTypes = {
     type: PropTypes.string.isRequired,
     color: PropTypes.string,

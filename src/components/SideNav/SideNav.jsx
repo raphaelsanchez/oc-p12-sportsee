@@ -6,6 +6,9 @@ import './SideNav.css'
  * Renders a side navigation bar.
  *
  * @returns {JSX.Element} The rendered SideNav component.
+ *
+ * @example
+ * return <SideNav />
  */
 export default function SideNav() {
     return (

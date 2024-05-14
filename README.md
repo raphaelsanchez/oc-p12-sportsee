@@ -43,11 +43,23 @@ Pour assurer une meilleure collaboration et une compréhension claire du code, l
 Le back peut être récupéré depuis le répo suivant: [sportSee back](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)
 Pour connaitre son fonctionnement, consultez son [README](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard/blob/master/README.md)
 
-L'API sera accessible depuis `http://localhost:3000`. Si l'application se lance sur une autre port, vous devrez alors mettre à jour `VITE_APP_BASE_URL` depuis le fichier `.env`
+L'API sera normalement accessible depuis `http://localhost:3000`.
+
+Si l'application se lance sur une autre port, vous devrez alors mettre à jour `VITE_APP_BASE_URL` depuis le fichier `.env`
 
 ### Lancer le front
 
-Lancer la commande `pnpm preview` pour lancer le serveur de prévisualisation.
+Avant de lancer le front, créer un fichier `.env` à la racine si il n'exite pas déjà et ajoutez y les constantes suivantes :
+
+```
+VITE_APP_BASE_URL=http://localhost:3000
+VITE_APP_USE_MOCKED_DATA=false
+```
+
+> NB: vous devrez peut être ajuster le port en fonction de votre environnement.
+
+Puis, lancer la commande `pnpm preview` pour lancer le serveur de prévisualisation.
+
 Pour travailler sur le projet, lancer le script `pnpm dev`
 
 ### Navigation
