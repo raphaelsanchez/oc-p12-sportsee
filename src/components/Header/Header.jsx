@@ -10,6 +10,9 @@ import './Header.css'
  * @param {Object} props - The component props.
  * @param {string} props.userId - The user ID.
  * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return <Header userId={1} />
  */
 export default function Header({ userId }) {
     const [userData, setUserData] = useState(null)

@@ -7,7 +7,7 @@ import KeyDatas from '@/components/charts/Keydatas/KeyDatas'
 import Performances from '@/components/charts/Performances/Performances'
 import Score from '@/components/charts/Score/Score'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import './Profile.css'
 
 /**
@@ -18,6 +18,7 @@ import './Profile.css'
 export default function Profile() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState(true)
+    const [isNotFound, setIsNotFound] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +26,9 @@ export default function Profile() {
                 setIsLoading(true)
                 await getUserData(Number(id))
             } catch (error) {
-                console.error(error)
+                if (error.message === 'User not found') {
+                    setIsNotFound(true)
+                }
             } finally {
                 setIsLoading(false)
             }
@@ -33,6 +36,10 @@ export default function Profile() {
 
         fetchData()
     }, [id])
+
+    if (isNotFound) {
+        return <Navigate to="/404" />
+    }
 
     if (isLoading) {
         return <Loader />

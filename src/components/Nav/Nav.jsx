@@ -6,6 +6,9 @@ import logo from '/logo.svg'
  * Renders the navigation component.
  *
  * @returns {JSX.Element} The rendered navigation component.
+ *
+ * @example
+ * return <Nav />
  */
 export default function Nav() {
     return (

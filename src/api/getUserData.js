@@ -6,10 +6,9 @@ import { getMockedUserData } from './mockData'
 const useMockedData = import.meta.env.VITE_APP_USE_MOCKED_DATA === 'true'
 
 /**
- * Retrieves all user data.
- * @param {string} id - The ID of the user.
- * @returns {Promise<Object>} - The user data.
- * @throws {Error} - If the user with the specified ID is not found.
+ * Retrieves user data from the API.
+ * @param {string} id - The user ID.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing user data.
  */
 export const getUserData = async (id) => {
     if (useMockedData) {
@@ -25,6 +24,11 @@ export const getUserData = async (id) => {
 
     const [userInfo, userActivity, userAverageSessions, userPerformance] =
         await Promise.all(urls.map((url) => fetchData(url)))
+
+    // Check if the user was found
+    if (!userInfo || !userInfo.data || !userInfo.data.id) {
+        throw new Error('User not found')
+    }
 
     return {
         userInfo: {

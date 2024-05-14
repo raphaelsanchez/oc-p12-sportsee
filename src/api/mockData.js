@@ -6,6 +6,12 @@ import {
     USER_PERFORMANCE,
 } from '../__mock__/data'
 
+/**
+ * Retrieves mocked user data based on the provided ID.
+ * @param {number} id - The ID of the user.
+ * @returns {Object} - An object containing the user's information, activity, average sessions, and performance.
+ * @throws {Error} - If the user with the provided ID is not found.
+ */
 export const getMockedUserData = (id) => {
     const userInfo = USER_MAIN_DATA.find((user) => user.id === id)
     const userActivity = USER_ACTIVITY.find((user) => user.userId === id)

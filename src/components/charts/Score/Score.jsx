@@ -19,10 +19,6 @@ export default function Score({ userId }) {
     const [score, setScore] = useState(0)
 
     useEffect(() => {
-        /**
-         * Fetches the user data and updates the score state.
-         * @returns {Promise<void>}
-         */
         const fetchData = async () => {
             try {
                 const userData = await getUserData(userId)
@@ -34,11 +30,10 @@ export default function Score({ userId }) {
         fetchData()
     }, [userId])
 
-    // Set the score value
-    const scoreValue = [{ value: score * 100 }]
-
-    // Set the new score value
-    const newScore = score * 100
+    // Calculate the score
+    const calculatedScore = score * 100
+    const scoreValue = [{ value: calculatedScore }]
+    const newScore = calculatedScore
 
     return (
         <section className="score">

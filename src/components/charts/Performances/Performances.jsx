@@ -34,8 +34,7 @@ export default function Performances({ userId = 0 }) {
         fetchData()
     }, [userId])
 
-    // Check if userPerformances[0] exists before accessing its properties
-    let transformedData = []
+    let transformedAndSortedData = []
 
     if (userPerformances && userPerformances.kindValue) {
         const order = {
@@ -49,8 +48,7 @@ export default function Performances({ userId = 0 }) {
 
         const data = userPerformances.kindValue
 
-        // Transform and sort data
-        transformedData = data
+        transformedAndSortedData = data
             .map((item) => ({
                 kind: Object.keys(order)[item.kind - 1],
                 value: item.value,
@@ -64,7 +62,7 @@ export default function Performances({ userId = 0 }) {
 
             <ResponsiveContainer width="100%" height="100%">
                 <RadarChart
-                    data={transformedData}
+                    data={transformedAndSortedData}
                     cx="50%"
                     cy="50%"
                     outerRadius="65%"
